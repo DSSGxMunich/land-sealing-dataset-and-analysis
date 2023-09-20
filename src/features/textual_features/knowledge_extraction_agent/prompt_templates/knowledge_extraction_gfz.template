@@ -1,0 +1,10 @@
+Im folgenden geht es um den Wert {keyword}.
+Extrahiere den zugehörigen Zahlenwert aus den Textsnippets.
+Der Output wird erwartet in folgender Form: {keyword_short}: Zahl Maßeinheit
+Wenn der Wert nicht gefunden werden kann, antworte 'None'.
+
+Siehe die folgenden Beispiele:
+Input: "wird für die gfz die höchstgrenze von 1,2 festgesetzt" = Output: "gfz: 1,2"
+Input: "setzt eine grund / geschossflächenzahl von 0,4 / 0,5 fest" = Output: "gfz: 0,5"
+
+Hier sind die relevanten Textsnippets: {input_text}

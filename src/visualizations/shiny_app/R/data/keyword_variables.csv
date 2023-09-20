@@ -1,0 +1,42 @@
+colname,variable_name,type
+baunvo_1,§1 BauNVO: Allgemeine Vorschriften,baunvo
+baunvo_2,§2 BauNVO: Kleinsiedlungsgebiete,baunvo
+baunvo_3,§3 BauNVO: Reine Wohngebiete,baunvo
+baunvo_4,§4 BauNVO: Allgemeine Wohngebiete,baunvo
+baunvo_4a,§4a BauNVO: Besondere Wohngebiete,baunvo
+baunvo_5,§5 BauNVO: Dorfgebiete,baunvo
+baunvo_5a,§5a BauNVO: Dörfliche Wohngebiete,baunvo
+baunvo_6,§6 BauNVO: Mischgebiete,baunvo
+baunvo_6a,§6a BauNVO: Urbane Gebiete,baunvo
+baunvo_7,§7 BauNVO: Kerngebiete,baunvo
+baunvo_8,§8 BauNVO: Gewerbegebiete,baunvo
+baunvo_9,§9 BauNVO: Industriegebiete,baunvo
+baunvo_10,"§10 BauNVO: Sondergebiete, die der Erholung dienen",baunvo
+baunvo_11,§11 BauNVO: Sonstige Sondergebiete,baunvo
+baunvo_12,§12 BauNVO: Stellplätze und Garagen,baunvo
+baunvo_13,§13 BauNVO: Gebäude und Räume für freie Berufe,baunvo
+baunvo_13a,§13a BauNVO: Ferienwohnungen,baunvo
+baunvo_14,§14 BauNVO: Nebenanlagen,baunvo
+baunvo_15,§15 BauNVO: Voraussetzungen für die Zulässigkeit,baunvo
+baunvo_16,§16 BauNVO Maß der baulichen Nutzung,baunvo
+baunvo_17,§17 BauNVO: Orientierungswerte für die Bestimmung des Maßes der baulichen Nutzung,baunvo
+baunvo_18,§18 BauNVO: Höhe baulicher Anlagen,baunvo
+baunvo_19,§19 BauNVO: Grundfläche,baunvo
+baunvo_20,§20 BauNVO: Geschossfläche,baunvo
+baunvo_21,§21 BauNVO Baumasse,baunvo
+baunvo_21a,"§21a BauNVO: Stellplätze, Garagen und Gemeinschaftsanlagen",baunvo
+x13b,13b,baunvo
+hq100,HQ 100,hochwasser
+hqhaufig,HQ Haufig,hochwasser
+hqextrem,HQ Extrem,hochwasser
+vorranggebiete,vorranggebiete,hochwasser
+vorbehaltsgebiete,vorbehaltsgebiete,hochwasser
+betroffen_von_uberschwemmung,betroffen_von_uberschwemmung,hochwasser
+innenentwicklung,innenentwicklung,hochwasser
+flachensparen,flachensparen,hochwasser
+fh_extracted_value,Firsthöhe,agent
+gfz_extracted_value,Geschoßflächenzahl ,agent
+grz_extracted_value,Grundflächenzahl,agent
+max_h_extracted_value,Maximale gebäudehöhe,agent
+min_h_extracted_value,Minimale gebäudehöhe,agent
+th_extracted_value,Traufhöhe,agent

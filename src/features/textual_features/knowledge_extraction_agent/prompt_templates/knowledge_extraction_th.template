@@ -1,0 +1,10 @@
+Im folgenden geht es um den Wert {keyword}.
+Extrahiere den zugehörigen Zahlenwert aus den Textsnippets.
+Der Output wird erwartet in folgender Form: {keyword_short}: Zahl Maßeinheit
+Wenn der Wert nicht gefunden werden kann, antworte 'None'.
+
+Siehe die folgenden Beispiele:
+Input: "zulässige traufhöhe beträgt 38,5 m über nhn, was rund 6,50 m über" = Output: "th: 6,50 m"
+Input: "th 7,20" = Output: "th: 7,20 m"
+
+Hier sind die relevanten Textsnippets: {input_text}

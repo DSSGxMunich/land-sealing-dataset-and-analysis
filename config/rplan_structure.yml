@@ -1,0 +1,94 @@
+---
+# This file contains parsing utilities used to extract the structure of the RPLAN
+# documents. The structure is defined by markers. These markers are regular expressions used to find the
+# target, principle and explanation sections. The markers are defined for each RPLAN document.
+format_1:
+  chapter_marker: '\d+\.' # Chapter structure is defined by a number followed by a dot: 1.1 Regionalplanung
+  target_marker: 'ziel \d+[:(\r?\n)\s]' # Ziel 1: Ziel 2: Ziel 3:
+  principle_marker: 'grundsatz \d+[:(\r?\n)]|grundsatz[(\r?\n)]|grundsätze:[ (\r?\n)]' # Grundsatz 1: Grundsatz 2:
+  explanation_marker: 'erläuterung[:(\r?\n)]|erläuterungen[:(\r?\n)]|erläuterung und begründung:' # Erläuterung:
+  file_names:
+    - "aachen-2016"
+    - "arnsberg-2012-kreis_soest_hochsauerlandkreis"
+    - "arnsberg-2008-siegen"
+    - "arnsberg-2004-dortmund_unna_hamm"
+    - "arnsberg-2001-bochum_hagen"
+    - "bielefeld-_"
+    - "bonn-2009"
+    - "detmold-2007-paderborn_hoexter"
+    - "muenster-2004" # erläuterungen[:(\r?\n)]'
+    - "muenster-2014"
+    - "ruhr-2009"
+
+format2:
+  chapter_marker: '\d+\.'
+  target_marker: 'z\d+'
+  principle_marker: 'g\d+'
+  explanation_marker: 'erläuterungen\n'
+  file_names:
+    - "duesseldorf-2018"
+
+format3:
+  chapter_marker: '\d+\.'
+  target_marker: 'Ziel +'
+  principle_marker: 'Grundsatz +'
+  explanation_marker: 'Zu Ziel Regionale Kooperationsstandorte sichern|Zu Grundsatz  Regionale Kooperation stärken\n'
+  file_names:
+    - "ruhr-2021"
+
+format4:
+  chapter_marker: '\d+\.'
+  target_marker: 'Ziel \d+ '
+  principle_marker: '\(\d+\) '
+  explanation_marker: 'erläuterung:'
+  file_names:
+    - "köln-2006"
+
+# TOC marker
+# This is a list of TOC markers, marking the end of the TOC. It is a searchable term marking the TOC end. You can
+# specify whether you want the first or last occurrence of the marker to be used. If you want to use the last
+# occurrence, set the last attribute to true. If you want to use the first occurrence, set the last attribute to
+# false.
+toc_marker:
+  aachen-2016:
+      - last: true
+      - "Abkürzungsverzeichnis"
+  arnsberg-2012-kreis_soest_hochsauerlandkreis:
+      - last: true
+      - "A Begründung der Planerarbeitung"
+  arnsberg-2008-siegen:
+      - last: true
+      - "A Begründung der Planerarbeitung"
+  arnsberg-2004-dortmund_unna_hamm:
+      - last: true
+      - "Einleitung"
+  arnsberg-2001-bochum_hagen:
+      - last: true
+      - "Einleitung"
+  bielefeld-_:
+      - last: false
+      - "Anhang"
+  detmold-2007-paderborn_hoexter:
+      - last: false
+      - "Anhang"
+  muenster-2004:
+      - last: true
+      - "- 1 -"
+  muenster-2014:
+      - last: true
+      - "Vorwort und Planbegründung"
+  ruhr-2009:
+      - last: true
+      - "Verzeichnisse "
+  duesseldorf-2018:
+      - last: true
+      - "LITERATUR‐"
+  ruhr-2021:
+      - last: true
+      - "Rahmenbedingungen und Entwicklungstrends in der"
+  köln-2006:
+      - last: false
+      - "Sachlicher Teilabschnitt Vorbeugender Hochwasserschutz, Teil 1 " # kein Inhaltsverzeichnis
+  bonn-2009:
+      - last: true
+      - "Abkürzungsverzeichnis"

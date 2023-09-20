@@ -1,0 +1,64 @@
+{
+  "hq100": {
+    "keywords": [
+      "hq 100",
+      "jahrhunderthochwasser",
+      "100-jährliches hochwasser",
+      "hundertjährliches hochwasser"
+    ],
+    "threshold": 85
+  },
+  "hqhäufig": {
+    "keywords": [
+      "hq häufig",
+      "häufiges hochwasserereignis",
+      "häufiges wasserereignis"
+    ],
+    "threshold": 85
+  },
+  "hqextrem": {
+    "keywords": [
+      "hq extrem",
+      "extrem hochwasserereignis",
+      "extremes wasserereignis"
+    ],
+    "threshold": 85
+  },
+  "vorranggebiete": {
+    "keywords": [
+      "vorranggebiet"
+    ],
+    "threshold": 90
+  },
+  "vorbehaltsgebiete": {
+    "keywords": [
+      "vorbehaltsgebiet"
+    ],
+    "threshold": 90
+  },
+  "affected_by_flooding": {
+    "keywords": [
+      "von wasseransammlungen betroffen",
+      "seltene oder extreme wasserereignisse",
+      "extreme wasserereignisse",
+      "seltene wasserereignisse",
+      "überschwemmungsgebiet",
+      "hochwasserentstehungsgebiet",
+      "hochwassergefährdungsgebiet",
+      "niederschlagswasser"
+    ],
+    "threshold": 90
+  },
+  "innenentwicklung": {
+    "keywords": [
+      "innenentwicklung"
+    ],
+    "threshold": 90
+  },
+  "flächensparen": {
+    "keywords": [
+      "flächensparen"
+    ],
+    "threshold": 90
+  }
+}

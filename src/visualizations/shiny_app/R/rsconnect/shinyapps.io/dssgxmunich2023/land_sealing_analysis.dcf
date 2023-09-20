@@ -1,0 +1,12 @@
+name: land_sealing_analysis
+title: land_sealing_analysis
+username: dssgxmunich2023
+account: dssgxmunich2023
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9865434
+bundleId: 7697310
+url: https://dssgxmunich2023.shinyapps.io/land_sealing_analysis/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

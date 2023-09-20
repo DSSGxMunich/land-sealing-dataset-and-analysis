@@ -1,0 +1,117 @@
+/* HEADINGS
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5em;
+    color: #0e3d64;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+
+h1 {
+    font-size: 1.7em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-weight: 600;
+
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+/* Content alignment
+----------------------------------------------------------*/
+
+.wy-nav-content {
+    max-width: 100% !important;
+
+}
+
+.rst-content {
+    max-width: 1000px !important;
+}
+
+
+dl, ol, ul {
+    width: 100% !important;
+}
+
+dt {
+    border-top: 3px solid #ffcf28 !important;
+    background: #eff1f2 !important;
+}
+
+
+html.writer-html4 .rst-content dl:not(.docutils) > dt, html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.simple) > dt {
+    color: #6e6e6e !important;
+}
+
+.a.reference {
+    color: black !important;
+}
+
+.rst-content .toctree-wrapper ul li > * {
+    margin-top: 0;
+}
+
+
+/* Tables in Notebooks
+----------------------------------------------------------*/
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.dataframe {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    width: 1000px !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.dataframe thead tr {
+    background-color: #ffcf28;
+    color: #0e3d64;
+}
+
+.dataframe th,
+.dataframe td {
+    padding: 12px 15px;
+}
+
+.dataframe tbody tr {
+    border-bottom: thin solid #0e3d64;
+}
+
+.dataframe tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.dataframe tbody tr:last-of-type {
+    border-bottom: thin solid #0e3d64;
+}
+
+.dataframe tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}

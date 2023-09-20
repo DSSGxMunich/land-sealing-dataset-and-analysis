@@ -1,0 +1,40 @@
+{
+    "hq100": [
+      "hq100",
+      "jahrhunderthochwasser",
+       "100-jährliches hochwasser",
+       "hundertjährliches hochwasser"
+    ],
+    "hqhäufig": [
+      "hqhäufig",
+      "häufiges wasserereignis",
+      "häufiges hochwasserereignis"
+    ],
+    "hqextrem": [
+      "hqextrem",
+      "extremes wasserereignis",
+      "extrem-hochwasserereignis"
+    ],
+    "vorranggebiete": [
+      "vorranggebiete"
+    ],
+    "vorbehaltsgebiete": [
+      "vorbehaltsgebiete"
+    ],
+    "betroffen_von_überschwemmung": [
+      "von wasseransammlungen betroffen",
+      "seltene oder extreme wasserereignisse",
+      "extreme wasserereignisse",
+      "seltene wasserereignisse",
+      "überschwemmungsgebiet",
+      "hochwasserentstehungsgebiet",
+      "hochwassergefährdungsgebiet",
+      "niederschlagswasser"
+    ],
+    "innenentwicklung": [
+      "innenentwicklung"
+    ],
+    "flächensparen": [
+      "flächensparen"
+    ]
+  }

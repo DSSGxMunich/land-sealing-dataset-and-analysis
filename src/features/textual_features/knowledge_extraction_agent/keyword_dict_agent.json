@@ -1,0 +1,43 @@
+[
+    {
+        "keyword": "firsth\u00f6he oder fh",
+        "keyword_short": "fh",
+        "template_name": "src/features/textual_features/knowledge_extraction_agent/prompt_templates/knowledge_extraction.template",
+        "filename": "firsth\u00f6he_80.csv"
+    },
+    
+    {  
+        "keyword": "traufh\u00f6he oder th",
+        "keyword_short": "th",
+        "template_name": "src/features/textual_features/knowledge_extraction_agent/prompt_templates/knowledge_extraction_th.template",
+        "filename": "traufh\u00f6he_80.csv"
+    }, 
+
+    {
+        "keyword": "geschossfl\u00e4chenzahl oder gfz",
+        "keyword_short": "gfz",
+        "template_name": "src/features/textual_features/knowledge_extraction_agent/prompt_templates/knowledge_extraction_gfz.template",
+        "filename": "geschossfl\u00e4chenzahl_80.csv"
+    },
+
+    {
+        "keyword": "grundfl\u00e4chenzahl oder grz",
+        "keyword_short": "grz",
+        "template_name": "src/features/textual_features/knowledge_extraction_agent/prompt_templates/knowledge_extraction.template", 
+        "filename": "grundfl\u00e4chenzahl_80.csv"
+    },
+    
+    {
+        "keyword": "minimale geb\u00e4udeh\u00f6he",
+        "keyword_short": "min_h",
+        "template_name": "src/features/textual_features/knowledge_extraction_agent/prompt_templates/knowledge_extraction.template", 
+        "filename": "minimale_geb\u00e4udeh\u00f6he_90.csv"
+    },
+
+    {
+        "keyword": "maximale geb\u00e4udeh\u00f6he",
+        "keyword_short": "max_h",
+        "template_name": "src/features/textual_features/knowledge_extraction_agent/prompt_templates/knowledge_extraction.template",
+        "filename": "maximale_geb\u00e4udeh\u00f6he_90.csv"
+    }
+]

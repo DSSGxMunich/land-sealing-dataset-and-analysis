@@ -1,0 +1,3 @@
+---
+input_geojson_path: "data/nwr/NRW_BP.geojson"
+pdf_output_folder: "data/nwr/pdfs"
