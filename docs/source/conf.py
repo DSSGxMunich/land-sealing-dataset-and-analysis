@@ -5,11 +5,8 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../../'))
-# todo use actual src path
-sys.path.append("/home/jonasklotz/DSSGx/dssgx_land_sealing_dataset_analysis/src")
-# for x in os.walk('../../src'):
-#   sys.path.insert(0, x[0])
+sys.path.append(os.path.abspath('../../src'))
+sys.path.append(os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------
 
@@ -30,7 +27,6 @@ extensions = ['sphinx.ext.todo', 'sphinx.ext.viewcode', 'sphinx.ext.autodoc',
               'sphinx.ext.autosummary',  # for automatic docstrings
               'sphinx.ext.intersphinx',
               'sphinx.ext.napoleon',  # for google style docstrings
-              'sphinx.ext.autosectionlabel',
               'sphinx.ext.githubpages',  # for github pages
               'sphinx.ext.duration',
               'sphinx.ext.doctest',
@@ -39,9 +35,12 @@ extensions = ['sphinx.ext.todo', 'sphinx.ext.viewcode', 'sphinx.ext.autodoc',
               ]
 
 nbsphinx_thumbnails = {
-    'content/notebooks/execute_pipeline': 'assets/dssgx_main.png',
+    'content/notebooks/*': '_static/dssgx_main.png',
 }
-
+# nbsphinx_thumbnails = {
+#     'content/notebooks/*': 'assets/dssgx_main.png',
+#     'orphan': 'assets/dssgx_main.png',
+# }
 
 source_suffix = [".rst", ".md"]
 napoleon_google_docstring = True

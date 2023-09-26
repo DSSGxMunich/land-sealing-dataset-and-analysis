@@ -3,7 +3,7 @@ library(tidyverse)
 
 #Here i will actually have to put in as input the documents and merge their geo column from land parcels
 
-df <- read_sf("../../../data/NRW/land_parcels.geojson")
+df <- read_sf("../../../data/nrw/bplan/raw/links/land_parcels.geojson")
 
 df <- df %>% mutate(datum = ymd(datum))
 

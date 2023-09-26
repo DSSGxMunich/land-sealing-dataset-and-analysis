@@ -1,12 +1,12 @@
 import os
 import re
-from utility.config_utils import read_yaml
+
 import pandas as pd
-import yaml
 from loguru import logger
 
 from data_pipeline.rplan_content_extraction.rplan_utils import RPLAN_OUTPUT_PATH, RPLAN_TXT_DIR, \
     RPLAN_PDF_DIR, CONFIG_FILE_PATH, parse_result_df, extract_text_and_save_to_txt_files
+from utility.config_utils import read_yaml
 
 
 class RPlanContentExtractor:

@@ -1,4 +1,3 @@
-import csv
 import pandas as pd
 import re
 
@@ -7,7 +6,10 @@ from unstructured.cleaners.core import clean
 
 def search_text_for_keywords(text: str,
                             keyword_dict: dict) -> dict:
-    """Function to find one-word or multiple-word keywords in input text.
+    """ Function to find one-word or multiple-word keywords in input text.
+
+    This function is used to search for keywords in a text. It takes as input a text and a dictionary with keywords
+    and returns a dictionary with the keywords found in the text. it is case-insensitive and uses substring matching.
 
     Args:
         text: Input string to be searched for keywords
@@ -54,10 +56,13 @@ def search_df_for_keywords(input_df: pd.DataFrame,
                            text_column_name: str,
                            keyword_dict: dict,
                            boolean: bool = False) -> pd.DataFrame:
-    """Function to process columns row by row, checking for all entries from keyword dict.
+    """ Function to process columns row by row, checking for all entries from keyword dict.
+
+    This function is used to search for keywords in a df. It takes as input a df and a dictionary with keywords
+    and returns a df with the keywords found in the text. It leverages the search_text_for_keywords function.
 
     Args:
-        df: Input df to be searched for keywords
+        input_df: Input df to be searched for keywords
         id_column_name: Name of the identifying column (e.g., filename)
         text_column_name: Name of the column in the input df holding the relevant text
         keyword_dict: Dict of relevant keywords
@@ -71,7 +76,7 @@ def search_df_for_keywords(input_df: pd.DataFrame,
     result_data = []
 
     # extract id and content from input_df; clean content column
-    input_df = input_df[[id_column_name, text_column_name]]
+    input_df = input_df[[id_column_name, text_column_name]].copy()
     input_df[text_column_name] = input_df[text_column_name].astype(str).apply(lambda x: clean(x, lowercase=True, dashes=True))
 
     # iterate over df and find keywords

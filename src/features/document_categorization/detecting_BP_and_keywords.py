@@ -187,7 +187,7 @@ def run_bp_keyword_detector(text_file_path: str,
         pd.DataFrame: dataframe with columns filename, document_category and the unique document id.
     """
     # Reading file
-    text_df = pd.read_csv(text_file_path, names=[id_column, text_column])
+    text_df = pd.read_json(text_file_path)
 
     # Running prepro of text column
     text_df = preprocess_text(text_df, text_column)

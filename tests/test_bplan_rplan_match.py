@@ -14,11 +14,10 @@ REGIONS_DF = os.path.join(os.path.dirname(__file__), "test_data", "regional_plan
 def test_merge():
     result_df = merge_rp_bp(path_bp_geo=SAMPLE_BP_TEST_DF,
                             path_rp_geo=REGIONS_DF)
-
     # assert datatypes
     assert isinstance(result_df, pd.DataFrame)
     assert all(result_df[col].dtype == expected_dtype
-               for col, expected_dtype in [('objectid', np.int64),
+               for col, expected_dtype in [('unique_id', np.int64),
                                            ('regional_plan_id', np.int64),
                                            ('regional_plan_name', object),
                                            ('ART', object),

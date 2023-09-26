@@ -1,24 +1,19 @@
 import os
 import re
 
-import pandas as pd
 import geopandas as gpd
+import pandas as pd
 
 from data_pipeline.pdf_scraper.tika_pdf_scraper import pdf_parser_from_folder
 
-RAW_DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","..", "..", "data", "nrw"))
-RPLAN_PDF_DIR = os.path.abspath(os.path.join(RAW_DATA_DIR, "rplan_pdfs"))
-RPLAN_TXT_DIR = os.path.abspath(os.path.join(RAW_DATA_DIR, "rplan_text"))
+RPLAN_PDF_DIR = '../data/nrw/rplan/raw/pdfs'
+RPLAN_TXT_DIR = '../data/nrw/rplan/raw/text'
 
-PARSED_DATA_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "nrw", ))
-RPLAN_OUTPUT_PATH = os.path.abspath(os.path.join(PARSED_DATA_DIR, "extracted_rplan_content.json"))
+RPLAN_OUTPUT_PATH = '../data/nrw/rplan/features/regional_plan_sections.json'
 
-CONFIG_FILE_PATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", "..", "config", "rplan_structure.yml"))
+CONFIG_FILE_PATH = '../config/rplan_structure.yml'
 
-REGIONS_MAPPING_PLAN = os.path.abspath(
-    os.path.join(os.path.dirname(__file__),  "..", "..", "..", "data", "nrw", "regions_map.geojson"))
+REGIONS_MAPPING_PLAN = '../data/nrw/rplan/raw/geo/regions_map.geojson'
 
 RPLAN_MATCH_DICT = {'Düsseldorf': 'duesseldorf-2018.pdf',
                     'Region Köln': 'köln-2006.pdf',
@@ -34,18 +29,16 @@ RPLAN_MATCH_DICT = {'Düsseldorf': 'duesseldorf-2018.pdf',
                     'Regionalverband Ruhr': 'ruhr-2021.pdf'}
 
 
-def extract_text_and_save_to_txt_files(pdf_dir_path: str):
-    """
-    Extracts text from pdf files in input_path and saves it to output_path.
+def extract_text_and_save_to_txt_files(pdf_dir_path: str, txt_dir_path: str = RPLAN_TXT_DIR):
+    """ Extracts text from pdf files in input_path and saves it to output_path.
     """
     parsed_df = pdf_parser_from_folder(folder_path=pdf_dir_path)
-    write_df_to_text(parsed_df)
+    write_df_to_text(parsed_df, txt_dir_path=txt_dir_path)
     return parsed_df
 
 
-def write_df_to_text(df, txt_dir_path=RPLAN_TXT_DIR):
-    """
-    Writes content from df to txt files.
+def write_df_to_text(df, txt_dir_path):
+    """ Writes content from df to txt files.
     """
     for filename, content in zip(df['filename'], df['content']):
         # save content as txt file
@@ -56,6 +49,15 @@ def write_df_to_text(df, txt_dir_path=RPLAN_TXT_DIR):
 def find_rplan_keyword_index(text, keywords, start=0, return_all=False):
     """
     Finds keywords in text and returns the index.
+
+    Args:
+        text (str): text to search in
+        keywords (str): keywords to search for
+        start (int): start index
+        return_all (bool): whether to return all matches or only the first one
+
+    Returns:
+        int: index of the keyword in the text
     """
     assert len(text) > start, "Start index is larger than text length"
     # escape all words
@@ -72,7 +74,16 @@ def find_rplan_keyword_index(text, keywords, start=0, return_all=False):
         return [match.start() for match in matches]
     return matches[0].start() if matches else None
 
-def _match_regions_to_pdf_files(df):
+
+def _match_regions_to_pdf_files(df: pd.DataFrame):
+    """ Matches the regions to the pdf files.
+
+    Args:
+        df: pd.DataFrame with columns ['filename',...]
+
+    Returns:
+        pd.DataFrame: with columns ['filename', ..., 'PLR']
+    """
     regions_map_df_full = gpd.read_file(REGIONS_MAPPING_PLAN)
     # filter all rows with PLR between 5000 and 6000
     regions_map_df = regions_map_df_full[
@@ -90,6 +101,8 @@ def _match_regions_to_pdf_files(df):
 
 def parse_result_df(df):
     """ Parses the result df from the rplan extractor.
+
+    Adds the year and the region to the df.
 
     Args:
         df: pd.DataFrame with columns ['filename',...]

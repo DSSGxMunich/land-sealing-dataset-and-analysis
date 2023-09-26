@@ -6,6 +6,10 @@ build:
     python: "mambaforge-22.9"
 
 conda:
-  environment: ubuntu22_environment.yml
+  environment: ubuntu_environment.yml
+
 sphinx:
   configuration: docs/source/conf.py
+
+formats:
+  - pdf

@@ -4,7 +4,7 @@ Getting Started
 Installation
 ------------
 
-1. Install  `Python <https://www.python.org/>`_ version 3.9 or greater.
+1. Install  `Python <https://www.python.org/>`_ version 3.10 or greater.
 
 2. Install `conda <https://docs.conda.io/en/latest/miniconda.html>`_.
 
@@ -20,7 +20,7 @@ Installation
 
    .. code-block:: bash
 
-      conda create --name land-sealing-env --file environment.yml
+      conda create --name land-sealing-env
 
 
 6. Activate the conda environment:
@@ -29,11 +29,26 @@ Installation
 
       conda activate land-sealing-env
 
+7. Install the requirements:
+
+   .. code-block:: bash
+
+      pip install -r requirements.txt
+
+
 
 
 First Steps
 ------------
 
-1. Download the data from the `DSSGxMunich Cloud Storage <fakelink.com>`_ and place it in the `data` folder.
+1. Download the `data.zip` from the `DSSGxMunich Huggingface <https://huggingface.co/DSSGxMunich>`_ .
 
-2. Run the exploratory data analysis notebooks in the `src` folder, e.g. `src/explorer.ipynb`.
+1. a. Unzip the `data.zip` file. Place the `data` folder in the `repository root` folder.
+
+1. b. A description of the data can be found in the Huggingface repository.
+
+2. Run the exploratory data analysis notebooks, e.g. `explorer.ipynb`.
+
+3. Run the execution pipeline notebooks, e.g. `src/1_execution_pipeline.ipynb`.
+
+

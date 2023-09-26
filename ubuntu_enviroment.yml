@@ -1,0 +1,27 @@
+name: land-sealing
+channels:
+- https://conda.anaconda.org/conda-forge
+dependencies:
+- pyyaml
+- tenacity
+- requests
+- geopandas
+- loguru
+- python-dotenv
+- tqdm
+- openai
+- tiktoken
+- langchain
+- sphinx
+- beautifulsoup4
+- matplotlib
+- seaborn
+- tika
+- nbsphinx
+- thefuzz
+- ipython
+- pip
+- pip:
+  - unstructured
+  - sphinx-gallery
+  - sphinx_rtd_theme

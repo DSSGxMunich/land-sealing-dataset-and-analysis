@@ -4,28 +4,35 @@ import os.path
 import pandas as pd
 from loguru import logger
 
-from features.textual_features.nlp_content_extraction.contextual_fuzzy_search import \
+from features.textual_features.keyword_search.contextual_fuzzy_search import \
     search_df_for_best_matches_keyword_dict
-from features.textual_features.nlp_content_extraction.exact_keyword_search import search_df_for_keywords
+from features.textual_features.keyword_search.exact_keyword_search import search_df_for_keywords
 from utility.config_utils import get_data_path, get_source_path
 from visualizations.rplan_visualization import plot_keyword_search_results
 
 rplan_content_path = os.path.join(get_data_path(), "nrw", "extracted_rplan_content.json")
 
-keyword_path = get_source_path() + "/features/textual_features/rplan_content_extraction/keywords/"
-rplan_exact_keyword_dict_path = keyword_path + "exact_keyword_dict_rplans.json"
-rplan_fuzzy_keyword_dict_path = keyword_path + "fuzzy_keyword_dict_rplans.json"
-rplan_negate_keyword_dict_path = keyword_path + "negate_keyword_dict_rplans.json"
+keyword_path = get_source_path() + "/data_pipeline/rplan_content_extraction/keywords"
+rplan_exact_keyword_dict_path = os.path.join(keyword_path, "exact_keyword_dict_rplans.json")
+rplan_fuzzy_keyword_dict_path = os.path.join(keyword_path, "fuzzy_keyword_dict_rplans.json")
+rplan_negate_keyword_dict_path = os.path.join(keyword_path, "negate_keyword_dict_rplans.json")
 
 
-def rplan_exact_keyword_search(input_df):
+def rplan_exact_keyword_search(input_df: 'pd.DataFrame', save_path: str = None, drop_false_rows=False):
     """ Function to search for keywords in a df.
+
+    This function uses excat matching to find the best matches for the keywords. It uses the extracted content from
+    the rplan pdfs as input. The keywords are stored in a json file. It basically uses the search_df_for_keywords
+    function from the contextual_exact_search module.
+
 
     Args:
         input_df: Input df to be searched for keywords
+        save_path: defaults to None; if None, the result is not saved
+        drop_false_rows: defaults to False; if True, rows with all False values are dropped
 
     Returns:
-        result_df: Result df of the keyword search
+        pd.DataFrame: Result df of the keyword search
     """
     index_column_name, input_df, rplan_keywords, text_column_name = _prepare_rplan_df(input_df,
                                                                                       rplan_exact_keyword_dict_path)
@@ -36,19 +43,26 @@ def rplan_exact_keyword_search(input_df):
                                        keyword_dict=rplan_keywords,
                                        boolean=True
                                        )
-    save_path = os.path.join(get_data_path(), "nrw", "rplan_exact_keyword_search_result.csv")
-    result_df = save_rplan_keyword_search(input_df, result_df, drop_false_rows=True, saving_filename=save_path)
+
+    result_df = save_rplan_keyword_search(input_df, result_df, drop_false_rows=drop_false_rows,
+                                          saving_filename=save_path)
     return result_df, rplan_keywords.keys()
 
 
-def rplan_fuzzy_keyword_search(input_df):
+def rplan_fuzzy_keyword_search(input_df: 'pd.DataFrame', save_path: str = None, drop_false_rows=False):
     """ Function to search for keywords in a df.
+
+    This function uses fuzzy matching to find the best matches for the keywords. It uses the extracted content from
+    the rplan pdfs as input. The keywords are stored in a json file. It basically uses the search_df_for_best_matches_keyword_dict
+    function from the contextual_fuzzy_search module.
 
     Args:
         input_df: Input df to be searched for keywords
+        save_path: defaults to None; if None, the result is not saved
+        drop_false_rows: defaults to False; if True, rows with all False values are dropped
 
     Returns:
-        result_df: Result df of the keyword search
+        pd.DataFrame: Result df of the keyword search
         rplan_keywords.keys(): List of keywords used for the search
     """
     index_column_name, input_df, rplan_keywords, text_column_name = _prepare_rplan_df(input_df,
@@ -61,12 +75,13 @@ def rplan_fuzzy_keyword_search(input_df):
                                                         default_threshold=70,
                                                         context_words=3)
 
-    save_path = os.path.join(get_data_path(), "nrw", "rplan_fuzzy_keyword_search_result.csv")
-    result_df = save_rplan_keyword_search(input_df, result_df, drop_false_rows=True, saving_filename=save_path)
+    result_df = save_rplan_keyword_search(input_df, result_df,
+                                          drop_false_rows=drop_false_rows,
+                                          saving_filename=save_path)
     return result_df, rplan_keywords.keys()
 
 
-def _prepare_rplan_df(input_df,
+def _prepare_rplan_df(input_df: 'pd.DataFrame',
                       keyword_dict_path):
     """ Function to prepare the input df for the keyword search.
 
@@ -92,8 +107,9 @@ def _prepare_rplan_df(input_df,
 def save_rplan_keyword_search(input_df,
                               result_df,
                               drop_false_rows=False,
-                              saving_filename="rplan_exact_keyword_search_result.json"):
+                              saving_filename: str = None):
     """ Function to save the result of the keyword search to a json file.
+
 
     Args:
         input_df: Input df to be searched for keywords
@@ -102,14 +118,14 @@ def save_rplan_keyword_search(input_df,
         saving_filename: defaults to "rplan_exact_keyword_search_result.json"; filename of the saved result
 
     Returns:
-        result_df: Result df of the keyword search with additional columns from the input df
+        pd.DataFrame: Result df of the keyword search with additional columns from the input df
 
     """
     if drop_false_rows:
-        result_df = result_df[result_df.drop(columns=["index"]).any(axis=1)]
+        result_df = result_df[result_df.drop(columns=["index"]).any(axis=1)].copy()
     result_df["index"] = result_df["index"].astype('int64')
     # for every entry get the section and chapter from the input df and append to result df
-    result_df = result_df.merge(input_df, on="index")
+    result_df = input_df.merge(result_df, on="index")
     if saving_filename and saving_filename.endswith(".json"):
         result_df.to_json(saving_filename)
 
@@ -121,13 +137,16 @@ def negate_keyword_search(input_df: 'pd.DataFrame',
                           keyword_column: str = 'section'):
     """ Function to negate the result of the keyword search.
 
+    This function removes rows from the input df if the negate keywords are found in the text. It is a simple
+    exact matching search.
+
     Args:
         input_df: Input df to be searched for keywords
         keyword_column: Name of the column in the input df holding the relevant text
         negate_keyword_dict_path: Path to the negate keyword dict
 
     Returns:
-        result_df: Result df of the keyword search with additional columns from the input df
+        pd.DataFrame: Result df of the keyword search with additional columns from the input df
 
     """
     with open(negate_keyword_dict_path) as f:

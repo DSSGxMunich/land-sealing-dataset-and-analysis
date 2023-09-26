@@ -19,12 +19,24 @@ from tenacity import (
     stop=stop_after_attempt(10)
 )
 def chat_completion_with_backoff(**kwargs):
+    """ Function that calls the OpenAI API with exponential backoff."""
     return openai.ChatCompletion.create(**kwargs)
 
 
 def check_token_count(input_text: str,
                       model_name: str = "gpt-3.5-turbo-0613"):
-    """Function that counts tokens, to be used before API call.
+    """ Function that counts tokens, to be used before API call.
+
+    This function is used to count the number of tokens in the input text. It takes as input a text and a model name
+    and returns the number of tokens in the text.
+
+    Args:
+        input_text(str): Input string to be searched for keywords
+        model_name(str): name of the llm used (for OpenAI API Call)
+
+    Returns:
+        num_tokens(int): number of tokens in the input text
+
     """
     encoding = tiktoken.encoding_for_model(model_name)
     num_tokens = len(encoding.encode(input_text))
@@ -115,7 +127,7 @@ def extract_numerical_value(keyword_short: str,
         input_df: df with identifier and content column
 
     Returns:
-        input_df: including new column for the extracted value
+        pd.DataFrame: including new column for the extracted value
 
     """
     # compile regex pattern incl. keyword
@@ -128,18 +140,21 @@ def extract_numerical_value(keyword_short: str,
 
 def validate_value_occurrence(keyword_short: str,
                               input_df: pd.DataFrame) -> pd.DataFrame:
-    """Function that verifies whether the extracted value was actually contained in the input string.
+    """ Function that verifies whether the extracted value was actually contained in the input string.
+
+    This function is used to validate whether the extracted value was actually contained in the input string.
+    It takes as input a df and a keyword and returns a df with a validation column.
 
     Args:
         keyword_short: abbreviated keyword
         input_df: df with identifier, content and value column
 
     Returns:
-        input_df: including new column for validation
+        pd.DataFrame: including new column for validation
 
     """
     # True if NaN or input text did contain the same numerical value
-    input_df[f'validation'] = input_df.apply(lambda row:
+    input_df['validation'] = input_df.apply(lambda row:
                                         pd.isna(row[f'{keyword_short}_extracted_value']) or
                                         (str(row[f'{keyword_short}_extracted_value']) in row[f'{keyword_short}_input']),
                                         axis=1)
@@ -152,18 +167,20 @@ def extract_knowledge_from_df(keyword_dict: dict,
                               id_column_name: str,
                               text_column_name: str,
                               model_name: str = "gpt-3.5-turbo-0613") -> pd.DataFrame:
-    """Function that extracts and validates relevant values from df column
+    """ Function that extracts relevant value from text input, if present and validates it.
+
+    This function is used to extract relevant information from a df of text snippets. It takes as input a df and a
+    dictionary with keywords and returns a df with the extracted information and a validation column.
 
     Args:
-        keyword: keyword of interest
-        keyword_short: abbreviated keyword
+        keyword_dict: dictionary containing keyword, keyword_short and template_name
         input_df: df
         id_column_name: name of the identifying column (e.g., filename)
         text_column_name: name of the column holding the relevant text
         model_name: name of the llm used (for OpenAI API Call)
 
     Returns:
-        all_responses_final: containing input_text, extracted_value, validation
+        pd.DataFrame: containing input_text, extracted_value, validation
 
     """
     # extract variables from keyword_dict
@@ -207,7 +224,7 @@ def extract_knowledge_from_df(keyword_dict: dict,
 
     # validate occurrence
     all_responses_final = validate_value_occurrence(keyword_short=keyword_short,
-                                                    input_df=all_responses)
+                                                    input_df=all_responses_final)
 
     # convert value column to float
     all_responses_final[f'{keyword_short}_extracted_value'] = all_responses_final[f'{keyword_short}_extracted_value'].str.replace(',', '.').astype(float)

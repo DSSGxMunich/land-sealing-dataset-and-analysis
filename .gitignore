@@ -158,27 +158,11 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
-data/nrw/pdfs/*
-data/nrw/text/test_nrw_all.csv
-# PDFs 
-src/NRW_PDF_downloader/data/NRW/sample_pdf/*
-src/NRW_PDF_downloader/test_data/*
-# PDFs 
-src/NRW_PDF_downloader/data/NRW/sample_pdf/*
-src/NRW_PDF_downloader/test_data/*
-=======
-data/keyword_search/fuzzy_search/75_20/firstho╠êhe.csv
-data/NRW/text/nrw_final_all.csv
 
 data/*
 data.zip
 =======
-src/data/*
-src/missing_data_analysis/data/*
-src/add_errors_new_scrap.ipynb
-src/scraping_gis_errors.ipynb
-*.pdf
-models/*
+
 .Rproj.user
 *.Rproj.user
 *.Rhistory

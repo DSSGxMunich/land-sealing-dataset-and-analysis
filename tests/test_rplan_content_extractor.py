@@ -4,7 +4,7 @@ import re
 import yaml
 
 from data_pipeline.rplan_content_extraction.rplan_content_extractor import RPlanContentExtractor
-from data_pipeline.rplan_content_extraction.rplan_utils import CONFIG_FILE_PATH
+CONFIG_FILE_PATH = 'config/rplan_structure.yml'
 
 CHAPTER_TEST_DATA = [
     """Titel

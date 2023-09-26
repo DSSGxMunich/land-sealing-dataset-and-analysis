@@ -25,8 +25,8 @@ server <- function(input, output, session) {
     } else {
       # Filter by date and join with the document keywords. Keep only column of the selected keyword. 
       filtered_df <- df %>%
-        filter(datum >= filter_date_range[1] & datum <= filter_date_range[2])%>%
-        inner_join(keywords_df %>% select(objectid, document_id, land_parcel_scanurl, !!filter_keyword)) 
+        filter(datum >= filter_date_range[1] & datum <= filter_date_range[2])#%>%
+        #inner_join(keywords_df %>% select(objectid, document_id, land_parcel_scanurl, !!filter_keyword)) 
       
       # Rename the column so it's easier to use, make dichotomic variable has keyword/doesnt have it
       filtered_df <- filtered_df %>%
@@ -36,12 +36,6 @@ server <- function(input, output, session) {
       filtered_df <- filtered_df%>%
         group_by_at(vars(objectid:kommune)) %>% 
         filter(!("has_word" %in% has_keyword) | has_keyword == "has_word")
-      
-      filtered_df <- filtered_df%>%
-        group_by_at(vars(objectid:kommune)) %>%
-        mutate(matchlinks = paste(land_parcel_scanurl, collapse = ", "),
-               matchwords = paste(keywords_match, collapse = ", ")) %>% 
-        select(-c(document_id, land_parcel_scanurl, keywords_match))
       
       filtered_df <- filtered_df %>% unique()
       
@@ -112,19 +106,7 @@ server <- function(input, output, session) {
   
   # Render the Leaflet map
   output$bplan_map <- renderLeaflet({
-    leaflet(filtered_data())%>% 
-      addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
-      fitBounds(~min(bounds$xmin), ~min(bounds$ymin), ~max(bounds$xmax), ~max(bounds$ymax)) %>%
-      addPolygons(
-        popup = ~paste("<b>Year:</b> ", year(datum),
-                       "<br><b>Name: </b>", name,
-                       "<br><b>Regional Plan: </b>", regional_plan_name,
-                       "<br><b>Original url: </b> <a href='", scanurl, "'>",scanurl,"</a>"),
-        fillColor = "#1f3d99",
-        weight = 0,
-        smoothFactor = 0.2,
-        fillOpacity = 0.8
-      )
+    bplans_plot
   })
   
   # Updating map dynamically with leafletProxy
@@ -141,8 +123,8 @@ server <- function(input, output, session) {
           popup = ~paste("<b>Year:</b> ", year(datum),
                          "<br><b>Name: </b>", name,
                          "<br><b>Regional Plan: </b>", regional_plan_name,
-                         "<br><b>Url: </b> <a href='", matchlinks, "'>",matchlinks,"</a>",
-                         "<br><b>Keywords: </b>", str_sub(matchwords, start = 1, end = 600)),
+                         "<br><b>Url: </b> <a href='", land_parcel_scanurl, "'>",land_parcel_scanurl,"</a>",
+                         "<br><b>Keywords: </b>", str_sub(keywords_match, start = 1, end = 600)),
           fillColor = pal(colorData),
           weight = 0,
           smoothFactor = 0.2,
@@ -179,16 +161,7 @@ server <- function(input, output, session) {
    
    # Render the Leaflet map
    output$regionalplan_map <- renderLeaflet({
-     leaflet(regions_geo %>% filter(LND == 5))%>% 
-       addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
-       fitBounds(~min(bounds$xmin), ~min(bounds$ymin), ~max(bounds$xmax), ~max(bounds$ymax)) %>%
-       addPolygons(
-         popup = ~paste(
-           "<b>Name:</b> ", Name),
-         fillColor = "#1f3d99",
-         weight = 1,
-         color = 'white'
-       )
+     regions_plot01
    })
    
    
@@ -216,19 +189,19 @@ server <- function(input, output, session) {
     
     # Wrap the rendering of textbox_ui in a reactive expression
     textbox_ui <- eventReactive(input$action, {
-      if (nrow(filtered_regions()) < 1) {
-        return(
-          HTML("<strong><span style='color: #c61a09;'>No regional plans found!</span></strong> Please try another topic or section.")
-        )
-      } else {
-        return(NULL)
-      }
-    })
+       if (nrow(filtered_regions()) < 1) {
+         return(
+           HTML("<strong><span style='color: #c61a09;'>No regional plans found!</span></strong> Please try another topic or section.")
+         )
+       } else {
+         return(NULL)
+       }
+     })
     
     # Update the UI with the textbox
     output$textbox_ui <- renderUI({
-      textbox_ui()
-    })
+       textbox_ui()
+     })
     
     
     

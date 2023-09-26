@@ -4,8 +4,8 @@ ui <- navbarPage(strong("Land Sealing Analysis of NRW"), id = "map_nav",
                  tabPanel('Home',
                  tags$style(HTML("
                       /* Center-align text */
-                      h1, h2, p {
-                        text-align: center;
+                      h1, h2, h3, h4, p {
+                        text-align: left;
                       }
                       
                       /* Add some margin to paragraphs for spacing */
@@ -33,17 +33,19 @@ ui <- navbarPage(strong("Land Sealing Analysis of NRW"), id = "map_nav",
                     <p>This is the Shiny App for the Land Sealing Analysis of North Rhine-Westphalia.</p>
                     <p>This was developed during the <a href="https://sites.google.com/view/dssgx-munich-2023/startseite">Data Science for Social Good project in Munich</a>, in the summer of 2023.</p>
                     <p>The goal of this App is to provide users information about building plans and regional plans in NRW. These documents were digitalized and certain relevant keywords were extracted using NLP techniques. </p>
-                    <h2 id="building-plans">Building plans</h2>
-                    <ol>
-                    <li>PDFs were scraped from the NRW geo dataportal and additional resources</li>
-                    <li>For the BauNVO and Hochwasser relevant info certain keywords were searched in the building plans. </li>
-                    <li>For other information, such as max. area permitted to build, min area and so a LLM model was used to extract information. </li>
-                    </ol>
-                    <h2 id="regional-plans">Regional plans</h2>
-                    <ol>
-                    <li>Certain regional plans were selected manually. </li>
-                    <li>The PDFs were segmented into chapters and sections as rows of dataframe.</li>
-                    <li>A keyword search for relevant words was made. </li>
+                    <h2 id="building-plans-and-regional-plans-documentation">Building Plans and Regional Plans Documentation</h2>
+                    <h3 id="building-plans">Building Plans</h3>
+                    <p>Building Plans allow users to filter and explore construction-related data within the date range of 2012 to 2022. This feature empowers users to track the evolution of specific keywords over time and across geographical locations, particularly those related to &quot;hochwasser&quot; (high water) or &quot;BauNVO&quot; (Building Land Use Ordinance).</p>
+                    <h4 id="keyword-exploration">Keyword Exploration</h4>
+                    <p>Users can gain insights into how keywords related to construction and flood management have appeared over time and in different regions. This data provides valuable information for various purposes, from research to urban planning.</p>
+                    <h4 id="structural-level-of-use">Structural Level of Use</h4>
+                    <p>By selecting any of the keywords in the &quot;Maß der baulichen Nutzung&quot; (Degree of Building Use) category, users can access information on the structural levels associated with each building plan. These values have been extracted using a Large Language Model, and additional details on the methodology and documentation are available in the project&#39;s GitHub repository.</p>
+                    <h3 id="regional-plans">Regional Plans</h3>
+                    <p>The Regional Plans section focuses on specific regional plans within the NRW (North Rhine-Westphalia) region. These plans have been manually selected and processed to provide users with comprehensive insights.</p>
+                    <h4 id="pdf-segmentation">PDF Segmentation</h4>
+                    <p>The PDFs of regional plans have been segmented into chapters and sections, effectively transforming them into structured rows of data. This approach allows users to explore the presence of specific keywords, such as &quot;Vorranggebiete&quot; (priority areas), &quot;Vorbehaltsgebiete&quot; (reserved areas), or areas affected by flooding, within each chapter and section of the plan.</p>
+                    <h4 id="keyword-search">Keyword Search</h4>
+                    <p>For enhanced usability, users can utilize the &quot;Explore topics by chapter&quot; feature. Simply enter a topic of interest that may be found within the regional plans. For example, searching for chapters containing the word &quot;wasser&quot; (water) and the section labeled &quot;explanation&quot; will help filter and display relevant information.</p>
                     </ol>
                     <p>The full code for this project and the development of the info can be found in the <a href="https://github.com/DSSGxMunich/dssgx_land_sealing_dataset_analysis">GitHub repository</a>.</p>
                     <p>Enjoy! </p>

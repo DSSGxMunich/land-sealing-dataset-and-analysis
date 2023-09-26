@@ -24,7 +24,7 @@ Extract Text from PDFs
 .. autofunction:: src.data_pipeline.pdf_scraper.tika_pdf_scraper.pdf_parser_from_path
 
 
-Extract content from NRW regional Plan PDFs
+Parsing the regional plans
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The RPlan Converter is used to extract the content from the regional plan PDFs.
