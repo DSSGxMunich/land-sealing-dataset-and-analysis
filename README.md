@@ -15,7 +15,8 @@ It also contains some visualizations and analysis of the dataset.
 
 As comprehensive dataset of land use in Germany is not available, this project aims to create a dataset that can be used for further analysis and research. The dataset is extracted from local landuse plans and regional from NRW in Germany. 
 
-The dataset is available on [Huggingface](https://huggingface.co/DSSGxMunichis).
+The dataset is available on [Huggingface](https://huggingface.co/datasets/DSSGxMunich/nrw-bplan-scrape/tree/main).
+To use this project you must download the data from there and unzip data.zip at the root directory.
 
 ![Shiny App](docs/source/assets/shiny_app.png)
 
