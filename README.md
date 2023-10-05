@@ -28,4 +28,4 @@ For the installation guideline check the [Read The Docs](https://land-sealing-da
 
 ## Shiny App
 
-Also, the results of the analysis are available as a Shiny App, which is available [here](https://dssg.shinyapps.io/land_sealing_dataset_analysis/).
+Also, the results of the analysis are available as a Shiny App, which is available [here](https://dssgxmunich2023.shinyapps.io/land_sealing_analysis/).
