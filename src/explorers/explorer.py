@@ -51,7 +51,7 @@ def regional_plans(input_filepath=
     df = df.rename(columns={'PLR': 'Region Plan ID'})
     return df
 
-def exact_keyword(input_filepath):
+def exact_keyword_baunvo(input_filepath):
     if input_filepath.endswith('.csv'):
         df = pd.read_csv(input_filepath)
     elif input_filepath.endswith('.json'):
@@ -64,6 +64,15 @@ def exact_keyword(input_filepath):
         if col != 'filename':
             df[col] = df[col].notna()
     
+    return df
+
+def exact_keyword_hochwasser(input_filepath):
+    if input_filepath.endswith('.csv'):
+        df = pd.read_csv(input_filepath)
+    elif input_filepath.endswith('.json'):
+        df = pd.read_json(input_filepath)
+    else:
+        raise ValueError("Unsupported file format. Only CSV and JSON files are supported.")
     return df
 
 def fuzzy_keyword(input_folder_path=HOCHWASSER_FUZZY_SEARCH_FILE_PATH_DIR):
