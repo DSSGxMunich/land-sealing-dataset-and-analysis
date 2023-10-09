@@ -4,7 +4,7 @@ import os
 
 DOCUMENT_TEXT_FILE_PATH = 'data/nrw/bplan/raw/text/document_texts.json' 
 LAND_PARCELS_FILE_PATH = 'data/nrw/bplan/raw/links/land_parcels.geojson' 
-RPLAN_OUTPUT_PATH = "data/nrw/rplan/features/rplan_keywords.json"
+RPLAN_OUTPUT_PATH = "data/nrw/rplan/features/regional_plan_sections.json"
 HOCHWASSER_FUZZY_SEARCH_FILE_PATH_DIR= 'data/nrw/bplan/features/keywords/fuzzy_search'
 
 def land_parcels(input_filepath=LAND_PARCELS_FILE_PATH):
